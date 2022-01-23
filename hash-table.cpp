@@ -15,11 +15,13 @@ struct set* y;
 struct set* array;
 
 
+
 class hash
 {
     Node* First;
 
 public:
+    ~hash();
     int T = 0;
     int N = 8;
     int size = 0;
@@ -31,7 +33,38 @@ public:
     void copy();
     void printkey(int key);
 };
-
+hash::~hash()
+{
+    int i;
+    for (i = 0; i < N; i++)
+    {
+        if (array[i].data->x != 0)
+        {
+          
+                Node* tmp = array[i].data;
+                Node* tmpNext = tmp;
+                 if (tmp != NULL) {
+                    while (tmp->Next != NULL)
+                    {
+                        tmpNext = tmp->Next;
+                        free(tmp);
+                        tmp = tmpNext;
+                    }
+                }
+                 else
+                 {
+                     free(array[i].data);
+                 }
+           
+            
+        }
+        else
+        {
+            free(array[i].data);
+        }
+    }
+    delete array;
+}
 int hash::hashFunction(int key)
 {
     return (key % N);
@@ -175,8 +208,7 @@ void hash::print()
         }
         else
         {
-            Node* tmp = new Node;
-           tmp = array[i].data;
+           Node* tmp = array[i].data;
            printf("\n");
            if (tmp != NULL) {
                
@@ -249,7 +281,7 @@ int main()
         case 5:
 
             c = 1;
-            delete[] array;
+    
             break;
 
         default:

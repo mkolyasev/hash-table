@@ -1,5 +1,4 @@
-﻿#include <stdio.h>
-#include <stdlib.h>
+#include <stdio.h>
 #include <iostream>
 
 struct Node
@@ -56,7 +55,7 @@ void hash::init()
 }
 void hash::insert(int key, int data)
 {
-
+    if (key < 0) key = key * -1;
     int index = hashFunction(key);
         Node* temp = new Node;
         temp->key = key;
@@ -147,7 +146,7 @@ void hash::printkey(int key)
     {
     
 
-        printf(" key: %d value[%d]: %d \t", temp->key, temp->x);
+        printf(" key: %d value[%d] \t", temp->key, temp->x);
     }
     else
     {
@@ -156,7 +155,7 @@ void hash::printkey(int key)
 
             while (temp->Next != NULL)
             {
-                printf(" key: %d value[%d]: %d ", temp->key, temp->x);
+                printf(" key: %d value[%d] ", temp->key, temp->x);
                 temp = temp->Next;
             }
         }
